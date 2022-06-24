@@ -1,0 +1,2 @@
+chatterbot error "AttributeError: module 'time' has no attribute 'clock'"
+https://stackoverflow.com/questions/72659999/chatterbot-module-error-attributeerror-module-collections-has-no-attribute
