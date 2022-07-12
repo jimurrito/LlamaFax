@@ -1,7 +1,16 @@
-# LlamaFax
- AI generated Llama facts
+# LlamaFax (In Development)
+<h2>AI generated Llama "facts"</h2>
+<ul>
+<li>Statments will be pulled from the internet, and saved into a Database.</li>
+<li>These "Raw" statments are tokenized, and analized by a NLN framwork. This output withh show what type of words are present, and what they mean.</li>
+<li>Raw data, and analysis data will be pulled from the database, and pushed into a NLN designed to replace certain words with llama related words.</li>
+<li>Statments generated will likely be 100% false, but hopfully some decent precentage of humor :).</li>
+<li>Once a statement is generated, it will be sent though an analysis to see if the sentence makes grammatical sense.</li>
+<li>If the statment passes vetting, it will be saved as a successful generation (RTS).</li>
+<li>Failed renders will be saved as corpus data.</li>
+</ul>
  
-# Current Architecture
+<h2>Current Architecture</h2>
 
-<img src="https://user-images.githubusercontent.com/77898354/175666347-025aefa2-4786-403d-aef1-a19cbae148b4.png" alt="Architecture Diagram">
+
 
