@@ -1,7 +1,0 @@
-# Grand plan for AI Llama fax bot
-
-# Wants
-> sarcastic facts about llamas. (EX) "the universe contains many llamas" 
-> generated facts are posted to twitter and or reddit.
-> reactions from posts will be used to determine accuracy -- This is very likely a terrible idea. incase you forget. google MSFt Tae AI bot :(
-> run natively in python
