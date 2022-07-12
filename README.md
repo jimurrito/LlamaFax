@@ -1,4 +1,4 @@
-# LlamaFax (In Development)
+# LlamaFax (Full-Alpha)
 <h2>AI generated Llama "facts"</h2>
 
 **DESCRIPTION IS OUT-OF-DATE**
