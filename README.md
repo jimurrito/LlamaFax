@@ -1,5 +1,8 @@
 # LlamaFax (In Development)
 <h2>AI generated Llama "facts"</h2>
+
+**DESCRIPTION IS OUT-OF-DATE**
+
 <ul>
 <li>Statments will be pulled from the internet, and saved into a Database.</li>
 <li>These "Raw" statments are tokenized, and analized by a NLN framwork. This output withh show what type of words are present, and what they mean.</li>
@@ -10,7 +13,7 @@
 <li>Failed renders will be saved as corpus data.</li>
 </ul>
  
-<h2>Current Architecture</h2>
+
 
 
 
