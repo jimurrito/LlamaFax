@@ -1,0 +1,14 @@
+app/scaleUI_Web_old.py
+.vscode/settings.json
+.vscode/launch.json
+resources.txt
+resources.legacy
+1 -- chatterbot/testAI.py
+1 -- chatterbot/resources
+1 -- chatterbot/db.sqlite3
+app/lib/seedgen.py
+app/lib/__pycache__/General.cpython-310.pyc
+app/lib/__pycache__/Ingresslib.cpython-310.pyc
+app/lib/__pycache__/Renderlib.cpython-310.pyc
+app/lib/__pycache__/Scalelib.cpython-310.pyc
+app/lib/__pycache__/ScalelibWeb.cpython-310.pyc

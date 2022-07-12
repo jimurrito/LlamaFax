@@ -1,0 +1,25 @@
+# Docker Container for Ingress Llamfax Service
+# sudo docker build -f dockerfile.ing -t jimurrito/lfxingress:latest .
+
+# [Notes]
+# No need for persisnat storage
+
+FROM jfloff/alpine-python:latest
+
+ARG APIKEY
+ENV APIKEY=${APIKEY}
+
+USER root
+# -p makes dirs recursive, even if parent exists
+RUN mkdir -p /llamafax/lib
+# Imports App Dependancies
+ADD app/ingress.py /llamafax/.
+ADD app/lib/. /llamafax/lib/.
+
+# Update and install Pip packages
+RUN apk update && apk upgrade && pip3 install --upgrade pip
+RUN pip3 install requests datetime pymongo
+
+WORKDIR /llamafax
+
+CMD python3 ingress.py --APIKey ${APIKEY}
