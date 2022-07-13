@@ -5,7 +5,7 @@ from datetime import datetime as DT
 import logging
 
 # Local host works, as its the relation between the service and the server, not the browser :)
-DBHost = "LFXMongo" #"127.0.0.1"
+DBHost = "10.4.18.2" #"127.0.0.1"
 RendQNam = "render"
 ArchDBNam = "archive"
 CorpDBNam = "corpus"

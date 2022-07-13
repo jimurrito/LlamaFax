@@ -14,6 +14,7 @@ RUN mkdir -p /llamafax/lib
 ADD app/scaleUI_Web.py /llamafax/.
 ADD app/lib/. /llamafax/lib/.
 ADD app/assets/. /llamafax/assets/.
+ADD app/.streamlit/ /llamafax/.streamlit/
 
 # Update and install Pip packages
 RUN apt-get update -y && apt-get install python3-pip -y && pip3 install --upgrade pip

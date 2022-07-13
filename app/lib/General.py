@@ -207,17 +207,17 @@ def makeXDigits(Input: int, Mod: int = 10) -> str:
 def main():
 
     DBAuth = "userAuth"
-    AuthDB = UAuth(DBAuth, Host="127.0.0.1")
+    AuthDB = UAuth(DBAuth, Host="10.4.18.2")
 
     # print(makeXDigits(1567))
 
     # print(AuthDB.valCreds("james@email.com", "password"))
 
-    print(AuthDB.addUser("person", "password", "person@me.c", "person", 11))
+    print(AuthDB.addUser("jimmer", "YourMom!!1", "james.immer@outlook.com", "James"))
 
     UsrAuth = {
         "_id": 'ObjectId("62cb7819c205a7060a62f308")',
-        "upn": "KingPin",
+        "upn": "jimmer",
         "pwd": "f1ae205d286871b66ded534f9bee2e3ddec603fd547912a1b7d906a5d1df05a3",
         "email": "james@email.com",
         "name": "James",
