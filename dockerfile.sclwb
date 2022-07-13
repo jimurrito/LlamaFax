@@ -1,0 +1,25 @@
+# Docker Container for Rating UI Llamfax Service
+# sudo docker build -f dockerfile.sclwb -t jimurrito/lfxsclwb:latest .
+
+# [Notes]
+# No need for persisnat storage
+# Alpine doesnt properly support the modules needed for Streamlit
+FROM ubuntu:latest
+
+USER root
+# -p makes dirs recursive, even if parent exists
+RUN mkdir -p /llamafax/lib
+
+# Imports App Dependancies
+ADD app/scaleUI_Web.py /llamafax/.
+ADD app/lib/. /llamafax/lib/.
+ADD app/assets/. /llamafax/assets/.
+ADD app/.streamlit/ /llamafax/.streamlit/
+
+# Update and install Pip packages
+RUN apt-get update -y && apt-get install python3-pip -y && pip3 install --upgrade pip
+RUN pip install pymongo streamlit
+
+WORKDIR /llamafax 
+
+CMD streamlit run scaleUI_Web.py --server.headless true  --server.enableCORS false --server.enableXsrfProtection false
