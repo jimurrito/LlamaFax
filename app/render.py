@@ -1,8 +1,13 @@
-from lib.General import *
+from lib.MongoDB import Queue
+from lib.General import prefTest
 from lib.Renderlib import *
+from time import sleep
+import os
+
+# [Vars from Enviroment]
+DBHost = os.getenv("DBHOST", "LFXMongo")
 
 # [VARS]
-DBHost = "LFXMongo" #"127.0.0.1"
 QChunk = "chunk"
 QRend = "render"
 Scope = ["NN", "NNS"]
@@ -28,6 +33,8 @@ logging.basicConfig(
 
 def main():
 
+    startUp()
+
     chkQueue = Queue(QChunk, Host=DBHost)
     rndQueue = Queue(QRend, Host=DBHost)
     prefObj = prefTest()
@@ -35,7 +42,7 @@ def main():
     while True:
         # PrefCatch
         if (chkQueue.count() <= 0) or (rndQueue.count() >= 100):
-            prefObj.vstop() 
+            prefObj.vstop()
             prefObj = prefTest()
 
         # Check if Chunk Queue has active messages

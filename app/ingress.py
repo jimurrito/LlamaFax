@@ -1,10 +1,15 @@
-from lib.General import *
+from lib.MongoDB import MongoDB
+from lib.General import prefTest
+from lib.MongoDB import Queue
 from lib.Ingresslib import *
+from time import sleep
 import logging
+import os
+
+DBHost = os.getenv("DBHOST", "LFXMongo")
 
 # [VARS]
 LogLevel = logging.INFO
-DBHost = "LFXMongo" #"127.0.0.1"
 QueueName = "raw"
 DBArch = "archive"
 
@@ -18,14 +23,17 @@ Categories = CATSch.allCats.value
 logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=LogLevel)
 
 # Sets Queue Object
-queue = Queue(QueueName,Host=DBHost)
+queue = Queue(QueueName, Host=DBHost)
 # Sets Archive DB Object
-ArchiveDB = Database(DBArch, Index="raw", Host=DBHost)
+ArchiveDB = MongoDB(DBArch, Indexes="raw", Host=DBHost)
 
-# Gets API keys from cli
-NinjaAPIKey, ScrapValues = getArgs()
+# Get API key from CLI
+NinjaAPIKey = os.getenv("APIKEY")
+
+# OLD Gets API keys from cli
+"""NinjaAPIKey, ScrapValues = getArgs()
 if ScrapValues:
-    logging.warning(f"Undefined Values provided {ScrapValues}")
+    logging.warning(f"Undefined Values provided {ScrapValues}")"""
 
 
 def NinjaAPI(Enable=True):
@@ -46,14 +54,17 @@ def NinjaAPI(Enable=True):
 
 
 def main():
+
+    startUp()
+
     prefObj = prefTest()
     while True:
         logging.info(f"Messages currently in Queue: {queue.count()}")
         # Show preformance on wait (temp fix)
         if queue.count() >= 100:
-            prefObj.vstop() 
+            prefObj.vstop()
             prefObj = prefTest()
-        
+
         # Wait and Check Threshold
         queue.threshold()
         logging.info("Begining Run")
@@ -61,9 +72,9 @@ def main():
         badItems = NinjaAPI(NinjaAPI_Enable)
 
         # Add Count to Perf (Minus facts that are not unique)
-        prefObj.docCount += (20 - badItems)
+        prefObj.docCount += 20 - badItems
 
-        sleep(0) #https://stackoverflow.com/a/7273727
+        sleep(0)
 
 
 main()

@@ -1,7 +1,26 @@
 # Libarry for Render Llamafax Service.
 import logging
+import os
 
 LlamaCorpus = {"NN": "llama", "NNS": "llamas"}
+
+
+def startUp():
+    print(
+        f"""
+        :::::::::  :::::::::: ::::    ::: :::::::::  :::::::::: :::::::::  
+        :+:    :+: :+:        :+:+:   :+: :+:    :+: :+:        :+:    :+: 
+        +:+    +:+ +:+        :+:+:+  +:+ +:+    +:+ +:+        +:+    +:+ 
+        +#++:++#:  +#++:++#   +#+ +:+ +#+ +#+    +:+ +#++:++#   +#++:++#:  
+        +#+    +#+ +#+        +#+  +#+#+# +#+    +#+ +#+        +#+    +#+ 
+        #+#    #+# #+#        #+#   #+#+# #+#    #+# #+#        #+#    #+# 
+        ###    ### ########## ###    #### #########  ########## ###    ### 
+
+            Component of Llamafax
+
+            Build v{os.getenv("BUILDVER", "0.0")}
+        """
+    )
 
 
 def render(Message: dict, Scope: list) -> list:
@@ -24,9 +43,7 @@ def render(Message: dict, Scope: list) -> list:
     def processCorp(Corpus: dict = LlamaCorpus) -> list:
         return [(PoS, Word) for PoS, Word in Corpus.items()]
 
-    def generator(
-        POSScope=inScope(), Scope=Scope, Base: str = Message["raw"], Corpus=LlamaCorpus
-    ):
+    def generator(POSScope=inScope(), Scope=Scope, Base: str = Message["raw"]):
         # For each POS found parsed from chunks EX ['state', 'NN'] each
         out = []
         logging.info("Generating Statments")
@@ -45,6 +62,14 @@ def render(Message: dict, Scope: list) -> list:
                 for scpPoS in Scope
                 if scpPoS == chkPoS
             ]
-        return out
+        return list(set(out))
 
     return generator()
+
+
+def main():
+    print(startUp())
+
+
+if __name__ == "__main__":
+    main()

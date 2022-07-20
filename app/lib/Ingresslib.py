@@ -5,6 +5,25 @@ import requests
 import random
 import sys
 import getopt
+import os
+
+
+def startUp():
+    print(
+        f"""
+      d888888b d8b   db  d888b  d8888b. d88888b .d8888. .d8888. 
+        `88'   888o  88 88' Y8b 88  `8D 88'     88'  YP 88'  YP 
+         88    88V8o 88 88      88oobY' 88ooooo `8bo.   `8bo.   
+         88    88 V8o88 88  ooo 88`8b   88~~~~~   `Y8b.   `Y8b. 
+        .88.   88  V888 88. ~8~ 88 `88. 88.     db   8D db   8D 
+      Y888888P VP   V8P  Y888P  88   YD Y88888P `8888Y' `8888Y' 
+
+            Component of Llamafax
+
+            Build v{os.getenv("BUILDVER", "0.0")}
+
+        """
+    )
 
 
 class CATSch(Enum):
@@ -13,20 +32,22 @@ class CATSch(Enum):
     fact = "facts?limit="
     quote = "quotes?category="
     quoteCats = ["happiness", "education"]
-    allCats = ["fact"] #"quote"
+    allCats = ["fact"]  # "quote"
 
 
-def getAPINinja(Key: str, Category: str = "fact", Limit: str = ..., catCat: str = "fact") -> list:
+def getAPINinja(
+    Key: str, Category: str = "fact", Limit: str = ..., catCat: str = "fact"
+) -> list:
     """Queries an API Ninja API to get back the requested data
     \nCATEGORY OPTIONS (Defaults)
-    \n-> fact ; Limit (20) (**30) 
+    \n-> fact ; Limit (20) (**30)
     \n QUOTE REMOVED AS THE OUTPUT WAS UNDESIREABLE
     \n-> quote : Limit (10) ; Categories[catCat] (random)
     \nReturns response from API in json"""
 
     def ifNoLimit(Category: str):
         if Category == "fact":
-            return 20 #30
+            return 20  # 30
         elif Category == "quote":
             return 10
         else:
@@ -65,6 +86,7 @@ def strip(Input: dict) -> dict:
         if Cat in CATSch.allCats.value:
             return {"data": Data}
 
+
 def getArgs():
     argList = sys.argv[1:]
     optS = "k:"
@@ -78,5 +100,14 @@ def getArgs():
                 Exception(f"Invalid Argument provided '{argList}'")
     except:
         Exception(
-            f"Error proccesing arguments. Please create bug report if this continues.")
+            f"Error proccesing arguments. Please create bug report if this continues."
+        )
     return APIKey, scrapValues
+
+
+def main():
+    startUp()
+
+
+if __name__ == "__main__":
+    main()

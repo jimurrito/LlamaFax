@@ -1,12 +1,34 @@
-from lib.General import *
+from lib.MongoDB import Queue
+from lib.General import prefTest
 from time import sleep
 import nltk
 from nltk.corpus import stopwords
 import string
 import logging
+import os
+
+# Startup
+def startUp():
+    print(
+        f"""
+        ██╗     ███████╗██╗  ██╗ ██████╗ ██████╗ 
+        ██║     ██╔════╝╚██╗██╔╝██╔═══██╗██╔══██╗
+        ██║     █████╗   ╚███╔╝ ██║   ██║██████╔╝
+        ██║     ██╔══╝   ██╔██╗ ██║   ██║██╔══██╗
+        ███████╗███████╗██╔╝ ██╗╚██████╔╝██║  ██║
+        ╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
+
+            Component of Llamafax
+
+            Build v{os.getenv("BUILDVER", "0.0")}
+        """
+    )
+
+
+# [Vars from Enviroment]
+DBHost = os.getenv("DBHOST", "LFXMongo")
 
 # [VARS]
-DBHost = "LFXMongo" #"127.0.0.1"
 QRaw = "raw"
 QChunk = "chunk"
 ChunkPattern = "NP: {<DT.?>*<JJ.?>*<VB.?>?<NN.?>+}"
@@ -45,18 +67,21 @@ def structure(Raw, Chunk) -> dict:
 
 
 def main():
+
+    startUp()
+
     # Download / Update NLTK libarries
     nltk.download(NLTKLibs)
 
     # Set Queue Vars
-    rawQueue = Queue(QRaw,Host=DBHost)
-    chkQueue = Queue(QChunk,Host=DBHost)
+    rawQueue = Queue(QRaw, Host=DBHost)
+    chkQueue = Queue(QChunk, Host=DBHost)
     prefObj = prefTest()
 
     while True:
         # PrefCatch
         if (rawQueue.count() <= 0) or (chkQueue.count() >= 100):
-            prefObj.vstop() 
+            prefObj.vstop()
             prefObj = prefTest()
 
         # Check if Raw Queue has active messages
@@ -90,7 +115,7 @@ def main():
         # Add Count to Perf
         prefObj.includeOne()
 
-        sleep(0)  # https://stackoverflow.com/a/7273727
+        sleep(0)
 
 
 main()

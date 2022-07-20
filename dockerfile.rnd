@@ -1,10 +1,9 @@
 # Docker Container for Render Llamfax Service
-# sudo docker build -f dockerfile.lex -t jimurrito/lfxrender:latest .
-
-# [Notes]
-# No need for persisnat storage
-
 FROM jfloff/alpine-python:latest
+
+ARG DBHOST="LFXMongo"
+ENV DBHOST=${DBHOST}
+ENV BUILDVER="1.07.1822"
 
 USER root
 # -p makes dirs recursive, even if parent exists
