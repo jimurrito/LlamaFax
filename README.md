@@ -1,4 +1,4 @@
-![Logo](https://pbs.twimg.com/profile_images/1545329627672981504/OmgLTp1N_400x400.jpg)
+![Logo](https://pbs.twimg.com/profile_images/1550147959379021824/EE1vU4LG_400x400.jpg)
 
 # LlamaFax
 ### Llama "Fact" Generation Engine
