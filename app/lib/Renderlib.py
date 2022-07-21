@@ -56,7 +56,6 @@ def render(Message: dict, Scope: list) -> list:
                     Base.replace(
                         chkWord,
                         [word for sop, word in processCorp() if sop == chkPoS][0],
-                        1,
                     )
                 )
                 for scpPoS in Scope
