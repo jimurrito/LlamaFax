@@ -10,3 +10,6 @@ app/lib/__pycache__/Renderlib.cpython-310.pyc
 app/lib/__pycache__/Scalelib.cpython-310.pyc
 app/lib/__pycache__/ScalelibWeb.cpython-310.pyc
 docker-compose.yml
+app/lib/__pycache__/tweetlib.cpython-310.pyc
+app/lib/__pycache__/MongoDB.cpython-310.pyc
+app/lib/__pycache__/Authlib.cpython-310.pyc

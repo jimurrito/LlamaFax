@@ -3,7 +3,7 @@ FROM jfloff/alpine-python:latest
 
 ARG DBHOST="LFXMongo"
 ENV DBHOST=${DBHOST}
-ENV BUILDVER="1.07.1822"
+ENV BUILDVER="1.07.2122"
 
 USER root
 # -p makes dirs recursive, even if parent exists

@@ -6,14 +6,12 @@ import tweepy
 def startUp():
     print(
         f"""
-       _  _  _  _  _                                             _        _  _  _  _                      _            
-      (_)(_)(_)(_)(_)                                           (_)      (_)(_)(_)(_) _                  (_)           
-            (_) _             _   _  _  _  _     _  _  _  _   _ (_) _  _  (_)        (_)    _  _  _    _ (_) _  _      
-            (_)(_)           (_) (_)(_)(_)(_)_  (_)(_)(_)(_)_(_)(_)(_)(_) (_) _  _  _(_) _ (_)(_)(_) _(_)(_)(_)(_)     
-            (_)(_)     _     (_)(_) _  _  _ (_)(_) _  _  _ (_)  (_)       (_)(_)(_)(_)_ (_)         (_)  (_)           
-            (_)(_)_  _(_)_  _(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)  (_)     _ (_)        (_)(_)         (_)  (_)     _     
-            (_)  (_)(_) (_)(_)  (_)_  _  _  _  (_)_  _  _  _    (_)_  _(_)(_)_  _  _ (_)(_) _  _  _ (_)  (_)_  _(_)    
-            (_)    (_)   (_)      (_)(_)(_)(_)   (_)(_)(_)(_)     (_)(_) (_)(_)(_)(_)      (_)(_)(_)       (_)(_)      
+        ████████╗██╗    ██╗███████╗███████╗████████╗██████╗  ██████╗ ████████╗
+        ╚══██╔══╝██║    ██║██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗╚══██╔══╝
+           ██║   ██║ █╗ ██║█████╗  █████╗     ██║   ██████╔╝██║   ██║   ██║   
+           ██║   ██║███╗██║██╔══╝  ██╔══╝     ██║   ██╔══██╗██║   ██║   ██║   
+           ██║   ╚███╔███╔╝███████╗███████╗   ██║   ██████╔╝╚██████╔╝   ██║   
+           ╚═╝    ╚══╝╚══╝ ╚══════╝╚══════╝   ╚═╝   ╚═════╝  ╚═════╝    ╚═╝   
 
             Component of Llamafax
 
@@ -22,24 +20,32 @@ def startUp():
     )
 
 
-def TweetConfig():
-    # Twitter Config
-    #   APIKey
-    APKey = "RONFnj4FkEAbmKkDLeYrcoLXo"
-    #   API key Secret
-    APKeySec = "sszPWRvxTP0eslCaG7DrMTTLm0yaMW6H6nJ6beRUJMFA43yYu5"
-    #   Access Token
-    ACTok = "1545325066602156033-EFRXUkbYRfxZzepJWAh2Plu4CMeTo6"
-    #   Access Token secret
-    ACTokSec = "ueowEhiWGPlvoxue0y34eU3qQquqVwdPyntkuh4d6Zz6p"
-    auth = tweepy.Client(
-        consumer_key=APKey,
-        consumer_secret=APKeySec,
-        access_token=ACTok,
-        access_token_secret=ACTokSec,
-    )
-    # Tweet
-    # auth.create_tweet(text="HelloWorld")
+
+# Hashtag management
+
+# > Pulls down Trending hashtags
+# > places Trending & Static hashtags into a list
+# > Runs all concurrently via Mutli-processing.
+# > hashtags proccessing:
+#   > checks if hashtag is already present in the collection
+#   > evaluates the degree of trending
+#       > Optionally compares new trending score against old
+#       > averages new and old score, saves as new score.
+# > uses score to represent the degree of "Trending" for each of the tags
+#       > Determine which, trending and static, tags to use based:
+#           - Remaining whitespace
+#           - degree of trending
+# > returns desired hashtags
+#
+# <><> IMPORTANT <><>
+# Before the full implementation of this feature, analysis needs to be done to avoid using controversial tags.
+# Controvercy being defined as:
+#   - Hate
+#   - Politics
+#   - Movements - (BLM, Roe vs Wade, etc), dont want to delegitamize the movements with memes.
+#   - Tragities - any situation where humans are/were harmed
+#
+#
 
 
 def main():

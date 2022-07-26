@@ -4,7 +4,7 @@ FROM ubuntu:latest
 
 ARG DBHOST="LFXMongo"
 ENV DBHOST=${DBHOST}
-ENV BUILDVER="1.07.2022"
+ENV BUILDVER="1.07.2122"
 
 USER root
 RUN mkdir -p /llamafax/lib

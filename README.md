@@ -28,8 +28,8 @@ All services are ran in independant docker containers
 
 ## In-depth Overview
 ### Core Services
-             
-             
+
+
 ### Ingress                                                     
 The primary focus is pulling raw, or known, facts from the internet, and structuring them for further processing.
 The main source used is API Ninjas, but I plan on expanding the list of sources as I scale out the engine.

@@ -62,7 +62,7 @@ class MongoDB:
         return self.Col.find(limit=Num)
 
     def validate(self, Data: dict) -> bool:
-        """Input Raw Queue message, returns True if statment was already processed."""
+        """Input document for validation, returns True if statment was already processed."""
         if self.Col.find_one(Data):
             return True
         return False
@@ -70,6 +70,14 @@ class MongoDB:
     def count(self) -> int:
         """Counts Documents in a MongoDB Collection"""
         return self.Col.count_documents({})
+
+    def random(self, Count=1) -> dict:
+        """Returns random document from a MongoDB Collection"""
+        # https://stackoverflow.com/questions/2824157/how-can-i-get-a-random-record-from-mongodb
+        Ag = list(self.Col.aggregate([{"$sample": {"size": Count}}]))
+        if Count == 1:
+            return Ag[0]
+        return Ag
 
     def generateAlphaKey(self, Num: int = 1):
         """[USED ONLY WITH AN APLHA KEY DATABASE]"""
@@ -258,7 +266,9 @@ class UAuth(MongoDB):
         """Intakes username and Email, returns userobject, without password :)"""
         # uses UPN to lookup user Object
         try:
-            UserObj = dict(list(self.Col.find({"upn": {"$exists": "true", "$eq": Upn}}))[0])
+            UserObj = dict(
+                list(self.Col.find({"upn": {"$exists": "true", "$eq": Upn}}))[0]
+            )
         except:
             return
         # Uses Object to validate email addresses
@@ -274,8 +284,8 @@ class UAuth(MongoDB):
 def main():
 
     UAuthDB = UAuth("userAuth", Host="10.4.18.2")
-    #print(UAuthDB.addtoScore(UAuthDB.valCreds("Milk", "YourMom!!1"), -12))
-    print(UAuthDB.updatePwd("Milk", "password"))
+    # print(UAuthDB.addtoScore(UAuthDB.valCreds("Milk", "YourMom!!1"), -12))
+    print(UAuthDB.random(1))
 
     # DBObj.push({"test": "value"})
 

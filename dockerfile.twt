@@ -1,0 +1,33 @@
+# Docker Container for Llamafax Tweetbot
+FROM jfloff/alpine-python:latest
+
+ARG CXAPKEY
+ENV CXAPKEY=${CXAPKEY}
+ARG CXAPSEC
+ENV CXAPSEC=${CXAPSEC}
+ARG ACTOKEN
+ENV ACTOKEN=${ACTOKEN}
+ARG ACTOKSEC
+ENV ACTOKSEC=${ACTOKSEC}
+
+ARG DBHOST="LFXMongo"
+ENV DBHOST=${DBHOST}
+ARG WAIT=6
+ENV WAIT=${WAIT}
+ENV BUILDVER="1.07.2622"
+
+USER root
+RUN mkdir -p /llamafax/lib
+
+# Imports App Dependancies
+ADD app/tweetbot.py /llamafax/.
+ADD app/lib/. /llamafax/lib/.
+ADD app/assets/. /llamafax/assets/.
+
+# Update and install Pip packages
+RUN apk update && apk upgrade && pip3 install --upgrade pip
+RUN pip install pymongo tweepy
+
+WORKDIR /llamafax
+
+CMD python3 tweetbot.py
